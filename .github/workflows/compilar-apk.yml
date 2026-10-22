@@ -50,8 +50,13 @@ jobs:
           sed -i 's|version "8.7.3"|version "8.11.1"|' android/settings.gradle.kts
           sed -i 's|version "2.1.0"|version "2.2.20"|' android/settings.gradle.kts
 
-      - name: Descargar dependencias
-        run: flutter pub get
+      - name: Arreglar la libreria NSFW
+        run: |
+          if ! grep -q cupertino_icons pubspec.yaml; then
+            sed -i '/cupertino_liquid_glass/a\  cupertino_icons: ^1.0.8' pubspec.yaml
+          fi
+          flutter pub get
+          find "$PUB_CACHE" -path '*nsfw_detect*/android/build.gradle' -exec sed -i "/flutter_embedding_debug/d" {} +
 
       - name: Compilar el APK
         run: flutter build apk --release --android-skip-build-dependency-validation
