@@ -49,6 +49,8 @@ jobs:
           sed -i 's|gradle-8.12-all.zip|gradle-8.14-all.zip|' android/gradle/wrapper/gradle-wrapper.properties
           sed -i 's|version "8.7.3"|version "8.11.1"|' android/settings.gradle.kts
           sed -i 's|version "2.1.0"|version "2.2.20"|' android/settings.gradle.kts
+          sed -i 's|xmlns:android="http://schemas.android.com/apk/res/android"|xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"|' android/app/src/main/AndroidManifest.xml
+          sed -i 's|android.permission.WRITE_EXTERNAL_STORAGE"|android.permission.WRITE_EXTERNAL_STORAGE" tools:replace="android:maxSdkVersion"|' android/app/src/main/AndroidManifest.xml
 
       - name: Arreglar la libreria NSFW
         run: |
