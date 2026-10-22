@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: linde
+        working-directory: flutter/linde
     steps:
       - name: Bajar el código
         uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
           if [ -f linde-android.zip ]; then
             unzip -o linde-android.zip
           fi
-          test -f linde/pubspec.yaml
+          test -f flutter/linde/pubspec.yaml
 
       - name: Instalar Java 17
         uses: actions/setup-java@v4
@@ -54,6 +54,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: linde-apk
-          path: linde/build/app/outputs/flutter-apk/app-release.apk
+          path: flutter/linde/build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
           retention-days: 14
