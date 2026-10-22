@@ -44,6 +44,10 @@ jobs:
             flutter create --org com.linde --project-name linde --platforms android .
           fi
 
+      - name: Actualizar Gradle
+        run: |
+          sed -i 's|gradle-8.12-all.zip|gradle-8.14-all.zip|' android/gradle/wrapper/gradle-wrapper.properties
+
       - name: Descargar dependencias
         run: flutter pub get
 
